@@ -1,12 +1,11 @@
 "use client";
 
-
 import { Menu, Search, ShoppingCart, User, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Header() {
-  const { user, isAuthenticated, logout } = useAuth();
+  const isAuthenticated = useState(true); 
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -18,10 +17,10 @@ export default function Header() {
   };
 
   return (
-    <header className="relative flex items-center justify-between px-6 py-4 bg-white text-secondary border-b border-gray-200">
+    <header className="relative flex items-center justify-between px-6 py-4 bg-white text-black border-b border-gray-200">
       {/* Title */}
       <h1 className="text-4xl font-bold">
-        <Link href="/" className="hover:text-primary transition-colors">
+        <Link href="/" className="hover:text-black transition-colors">
           Logo
         </Link>
       </h1>
@@ -30,7 +29,7 @@ export default function Header() {
       <div className="absolute right-6 flex items-center space-x-4">
         {!isSearchOpen ? (
           <Search
-            className="h-6 w-6 cursor-pointer hover:text-primary transition-colors"
+            className="h-6 w-6 cursor-pointer hover:text-black transition-colors"
             onClick={() => setSearchOpen(true)}
           />
         ) : (
@@ -44,12 +43,12 @@ export default function Header() {
             />
             <button
               onClick={handleSearch}
-              className="text-primary font-medium hover:underline px-2"
+              className="text-black font-medium hover:underline px-2"
             >
               Go
             </button>
             <X
-              className="h-5 w-5 cursor-pointer text-gray-500 hover:text-primary transition-colors"
+              className="h-5 w-5 cursor-pointer text-gray-500 hover:text-black transition-colors"
               onClick={() => {
                 setSearchQuery("");
                 setSearchOpen(false);
@@ -59,7 +58,7 @@ export default function Header() {
         )}
 
         <Link href="/cart">
-          <ShoppingCart className="h-6 w-6 cursor-pointer hover:text-primary transition-colors" />
+          <ShoppingCart className="h-6 w-6 cursor-pointer hover:text-black transition-colors" />
         </Link>
 
         {isAuthenticated ? (
@@ -75,7 +74,7 @@ export default function Header() {
               </Link>
 
               <button
-                onClick={logout}
+                //onClick={logout}
                 className="w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
               >
                 Logout
