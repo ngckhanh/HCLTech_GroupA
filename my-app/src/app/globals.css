@@ -1,20 +1,26 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'tailwindcss';
 
+/* --- Root variables --- */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 
-  --font-inter: 'Inter', sans-serif;
-  --font-playfair: 'Playfair Display', serif;
+  --color-primary: #293238;
+  --color-primary-light: #3d4a54;
+  --color-primary-dark: #1c2429;
+
+  --color-secondary: #4A5A64;
+  --color-secondary-light: #5d6c78;
+  --color-secondary-dark: #37434b;
+
+  --font-urbanist: 'Urbanist', sans-serif;
+  --font-roboto: 'Roboto', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
-}
-
+/* --- Dark mode --- */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -22,16 +28,54 @@
   }
 }
 
+/* --- Body styles --- */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), Arial, sans-serif;
 }
 
-.font-inter {
-  font-family: var(--font-inter);
+/* --- Utility classes --- */
+.bg-primary {
+  background-color: var(--color-primary);
 }
 
-.font-playfair {
-  font-family: var(--font-playfair);
+.bg-primary-light {
+  background-color: var(--color-primary-light);
+}
+
+.bg-primary-dark {
+  background-color: var(--color-primary-dark);
+}
+
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bg-secondary-light {
+  background-color: var(--color-secondary-light);
+}
+
+.bg-secondary-dark {
+  background-color: var(--color-secondary-dark);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.font-urbanist {
+  font-family: var(--font-urbanist);
+}
+
+.font-roboto {
+  font-family: var(--font-roboto);
+}
+
+.input-field {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-md bg-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300;
 }

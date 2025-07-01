@@ -1,17 +1,19 @@
-import { Inter, Playfair_Display } from "next/font/google";
+import { Urbanist, Roboto } from "next/font/google";
+
 import "./globals.css";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 
-const inter = Inter({
+const urbanist = Urbanist({
+  //variable: "--font-urbanist",
   subsets: ["latin"],
-  variable: "--font-inter",
-});
+})
 
-const playfair = Playfair_Display({
+const roboto = Roboto({
+  //variable: "--font-roboto",
   subsets: ["latin"],
-  variable: "--font-playfair",
-});
+})
+
 
 export const metadata = {
   title: "Create Next App",
@@ -20,7 +22,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-     <html lang="en" className={`${inter.className} ${playfair.className}`}>
+     <html lang="en" className={`${urbanist.className} ${roboto.className}`}>
       <body>
         <Header />
         {children}

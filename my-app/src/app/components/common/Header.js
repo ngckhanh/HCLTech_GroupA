@@ -21,7 +21,7 @@ export default function Header() {
       {/* Title */}
       <h1 className="text-4xl font-bold">
         <Link href="/" className="hover:text-black transition-colors">
-          Logo
+          Origity
         </Link>
       </h1>
 
