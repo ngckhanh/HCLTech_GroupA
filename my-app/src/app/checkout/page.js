@@ -37,12 +37,12 @@ export default function CheckoutPage() {
   const [selectedCartItems] = useState(mockSelectedCart);
 
   const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    address: "",
+    userName: "",
+    phoneNumber: "",
+    street: "",
     city: "",
     country: "",
-    zip: "",
+    zipCode: "",
     coupon: "",
   });
 
@@ -61,9 +61,9 @@ export default function CheckoutPage() {
         ...prev,
         country: value,
         city: "",
-        phone: phonePrefixes[value] || "",
+        phoneNumber: phonePrefixes[value] || "",
       }));
-      setErrors((prev) => ({ ...prev, country: "", city: "", phone: "" }));
+      setErrors((prev) => ({ ...prev, country: "", city: "", phoneNumber: "" }));
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
       setErrors((prev) => ({ ...prev, [name]: "" }));
@@ -71,38 +71,38 @@ export default function CheckoutPage() {
   };
 
   const isFormIncomplete =
-    !form.name.trim() ||
-    !form.phone.trim() ||
-    !form.address.trim() ||
+    !form.userName.trim() ||
+    !form.phoneNumber.trim() ||
+    !form.street.trim() ||
     !form.city.trim() ||
     !form.country.trim() ||
-    !form.zip.trim() ||
+    !form.zipCode.trim() ||
     !paymentMethod;
 
   const validateForm = () => {
     const newErrors = {};
-    if (!form.name.trim()) newErrors.name = "Name is required";
-    if (!form.phone.trim()) {
-    newErrors.phone = "Phone number is required";
+    if (!form.userName.trim()) newErrors.userName = "Name is required";
+    if (!form.phoneNumber.trim()) {
+    newErrors.phoneNumber = "Phone number is required";
   } else {
-    const rawPhone = form.phone.replace(/\s+/g, "");
+    const rawPhone = form.phoneNumber.replace(/\s+/g, "");
     const expectedPrefix = phonePrefixes[form.country]?.replace(/\s+/g, "") || "";
 
     if (!rawPhone.startsWith(expectedPrefix)) {
-      newErrors.phone = `Phone number must start with ${phonePrefixes[form.country] || "correct prefix"}`;
+      newErrors.phoneNumber = `Phone number must start with ${phonePrefixes[form.country] || "correct prefix"}`;
     } else {
       const numberWithoutPrefix = rawPhone.slice(expectedPrefix.length);
       const isValid = /^\d{6,10}$/.test(numberWithoutPrefix); // basic digit length rule
 
       if (!isValid) {
-        newErrors.phone = "Phone number format is invalid";
+        newErrors.phoneNumber = "Phone number format is invalid";
       }
     }
   }
-    if (!form.address.trim()) newErrors.address = "Address is required";
+    if (!form.street.trim()) newErrors.street = "Address is required";
     if (!form.city.trim()) newErrors.city = "City is required";
     if (!form.country.trim()) newErrors.country = "Country is required";
-    if (!form.zip.trim()) newErrors.zip = "Zip code is required";
+    if (!form.zipCode.trim()) newErrors.zipCode = "Zip code is required";
     if (!paymentMethod) newErrors.paymentMethod = "Select a payment method";
 
     setErrors(newErrors);
@@ -150,14 +150,14 @@ export default function CheckoutPage() {
             <div>
               <input
                 name="name"
-                value={form.name}
+                value={form.userName}
                 onChange={handleInputChange}
                 type="text"
                 placeholder="Name*"
                 className="input-field"
               />
-              {errors.name && (
-                <p className="text-red-500 text-sm">{errors.name}</p>
+              {errors.userName && (
+                <p className="text-red-500 text-sm">{errors.userName}</p>
               )}
             </div>
 
@@ -185,28 +185,28 @@ export default function CheckoutPage() {
             <div>
               <input
                 name="address"
-                value={form.address}
+                value={form.street}
                 onChange={handleInputChange}
                 type="text"
                 placeholder="Address*"
                 className="input-field"
               />
-              {errors.address && (
-                <p className="text-red-500 text-sm">{errors.address}</p>
+              {errors.street && (
+                <p className="text-red-500 text-sm">{errors.street}</p>
               )}
             </div>
 
             <div>
               <input
                 name="phone"
-                value={form.phone}
+                value={form.phoneNumber}
                 onChange={handleInputChange}
                 type="text"
                 placeholder="Phone Number*"
                 className="input-field"
               />
-              {errors.phone && (
-                <p className="text-red-500 text-sm">{errors.phone}</p>
+              {errors.phoneNumber && (
+                <p className="text-red-500 text-sm">{errors.phoneNumber}</p>
               )}
             </div>
           </div>
@@ -235,14 +235,14 @@ export default function CheckoutPage() {
             <div>
               <input
                 name="zip"
-                value={form.zip}
+                value={form.zipCode}
                 onChange={handleInputChange}
                 type="text"
                 placeholder="Zip code*"
                 className="input-field"
               />
-              {errors.zip && (
-                <p className="text-red-500 text-sm">{errors.zip}</p>
+              {errors.zipCode && (
+                <p className="text-red-500 text-sm">{errors.zipCode}</p>
               )}
             </div>
           </div>
