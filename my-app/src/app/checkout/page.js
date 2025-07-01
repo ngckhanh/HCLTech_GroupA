@@ -82,7 +82,23 @@ export default function CheckoutPage() {
   const validateForm = () => {
     const newErrors = {};
     if (!form.name.trim()) newErrors.name = "Name is required";
-    if (!form.phone.trim()) newErrors.phone = "Phone number is required";
+    if (!form.phone.trim()) {
+    newErrors.phone = "Phone number is required";
+  } else {
+    const rawPhone = form.phone.replace(/\s+/g, "");
+    const expectedPrefix = phonePrefixes[form.country]?.replace(/\s+/g, "") || "";
+
+    if (!rawPhone.startsWith(expectedPrefix)) {
+      newErrors.phone = `Phone number must start with ${phonePrefixes[form.country] || "correct prefix"}`;
+    } else {
+      const numberWithoutPrefix = rawPhone.slice(expectedPrefix.length);
+      const isValid = /^\d{6,10}$/.test(numberWithoutPrefix); // basic digit length rule
+
+      if (!isValid) {
+        newErrors.phone = "Phone number format is invalid";
+      }
+    }
+  }
     if (!form.address.trim()) newErrors.address = "Address is required";
     if (!form.city.trim()) newErrors.city = "City is required";
     if (!form.country.trim()) newErrors.country = "Country is required";
@@ -97,6 +113,7 @@ export default function CheckoutPage() {
   if (!validateForm()) return;
 
   setIsProcessing(true);
+  console.log("Submitting checkout with form data:", form);
 
   try {
     await saveCheckoutAddress({

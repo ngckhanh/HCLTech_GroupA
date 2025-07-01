@@ -8,6 +8,7 @@ export const saveCheckoutAddress = async (credentials) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/checkout`, credentials, {
     });
+    console.log('Checkout successful:', response.data);
     return response.data;
   } catch (error) {
     console.error('Checkout failed:', error);
