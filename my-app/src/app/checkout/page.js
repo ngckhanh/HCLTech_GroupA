@@ -149,7 +149,7 @@ export default function CheckoutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <input
-                name="name"
+                name="userName"
                 value={form.userName}
                 onChange={handleInputChange}
                 type="text"
@@ -184,7 +184,7 @@ export default function CheckoutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <input
-                name="address"
+                name="street"
                 value={form.street}
                 onChange={handleInputChange}
                 type="text"
@@ -198,7 +198,7 @@ export default function CheckoutPage() {
 
             <div>
               <input
-                name="phone"
+                name="phoneNumber"
                 value={form.phoneNumber}
                 onChange={handleInputChange}
                 type="text"
@@ -234,7 +234,7 @@ export default function CheckoutPage() {
 
             <div>
               <input
-                name="zip"
+                name="zipCode"
                 value={form.zipCode}
                 onChange={handleInputChange}
                 type="text"
