@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { saveCheckoutAddress } from "../apis/checkout.api";
 
 const mockSelectedCart = [
   {
@@ -92,15 +93,28 @@ export default function CheckoutPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleCheckout = () => {
-    if (validateForm()) {
-      setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setIsModalOpen(true);
-      }, 1500);
-    }
-  };
+  const handleCheckout = async () => {
+  if (!validateForm()) return;
+
+  setIsProcessing(true);
+
+  try {
+    await saveCheckoutAddress({
+      ...form,
+      //paymentMethod,
+      //items: selectedCartItems,
+      //total: cartTotal,
+    });
+
+    setIsModalOpen(true);
+  } catch (err) {
+    alert("Checkout failed. Please try again.");
+    console.error(err);
+  } finally {
+    setIsProcessing(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen w-full bg-white text-primary py-10 px-4 font-roboto">
